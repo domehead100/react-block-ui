@@ -28,9 +28,9 @@ class BlockUi extends Component {
   }
 
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.blocking !== this.props.blocking) {
-      if (nextProps.blocking) {
+  componentDidUpdate(prevProps) {
+    if (prevProps.blocking !== this.props.blocking) {
+      if (props.blocking) {
         // blocking started
         if (this.helper && this.helper.parentNode && this.helper.parentNode.contains
           && this.helper.parentNode.contains(safeActiveElement())) {
@@ -51,9 +51,9 @@ class BlockUi extends Component {
         }
       }
     }
-    if (nextProps.keepInView && (nextProps.keepInView !== this.props.keepInView || (nextProps.blocking && nextProps.blocking !== this.props.blocking))) {
+    if (prevProps.keepInView && (prevProps.keepInView !== this.props.keepInView || (prevProps.blocking && prevProps.blocking !== this.props.blocking))) {
       this.attachListeners();
-      this.keepInView(nextProps);
+      this.keepInView(prevProps);
     }
   }
 
